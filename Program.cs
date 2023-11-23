@@ -1,18 +1,15 @@
-﻿
-using System.Reflection;
+﻿using System.Reflection;
 
-internal class Program
+Console.WriteLine("Hello, World!");
+
+var methodInfo = typeof(THExtender).GetMethod(nameof(THExtender.GetStatus));
+if (methodInfo?.GetCustomAttribute(typeof(StatusAttribute<>), false) is StatusAttribute statusAttribute)
 {
-    private static void Main(string[] args)
-    {
-        Console.WriteLine("Hello, World!");
-
-        var methodInfo = typeof(THExtender).GetMethod(nameof(THExtender.GetStatus));
-        var attr =  methodInfo?.GetCustomAttribute(typeof(StatusAttribute<>), false);
-        
-    }
+    Console.WriteLine($"Name:'{statusAttribute.Name}'");
+    Console.WriteLine($"TypeName:'{statusAttribute.TypeName}'");
 }
-
+else
+    Console.WriteLine("Generic Attributes not supported");
 
 public class THExtender {
 

@@ -1,11 +1,14 @@
 
-[AttributeUsage(AttributeTargets.Method)]
-public class StatusAttribute<T> : Attribute
+public abstract class StatusAttribute : Attribute
 {
-    public StatusAttribute()
-    {
-    }
-
     public string? Name  { get; init; }
+
+     public abstract string TypeName { get; }
+}
+
+[AttributeUsage(AttributeTargets.Method)]
+public class StatusAttribute<T> : StatusAttribute 
+{
+    public override string TypeName => typeof(T).Name;
     
-}  //Requires C# 11
+}  
